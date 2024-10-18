@@ -1,15 +1,19 @@
 /// https://practice.course.rs/compound-types/string.html
+#[test]
 fn test60() {
     let s: &str = "hello, world";
 }
+#[test]
 fn test61() {
     let s: Box<str> = "hello, world".into();
     greetings1(&s)
 }
 
+
 fn greetings1(s: &str) {
     println!("{}",s)
 }
+#[test]
 fn test62() {
     let s: Box<&str> = "hello, world".into();
     greetings2(*s)
@@ -18,6 +22,7 @@ fn test62() {
 fn greetings2(s: &str) {
     println!("{}", s);
 }
+#[test]
 fn test63() {
     let mut s = String::new();
     s.push_str("hello, world");
@@ -25,6 +30,7 @@ fn test63() {
 
     assert_eq!(s, "hello, world!");
 }
+#[test]
 fn test64() {
     let mut s = String::from("hello");
     s.push(',');
@@ -33,6 +39,7 @@ fn test64() {
 
     println!("{}", s)
 }
+#[test]
 fn test65() {
     let s = String::from("I like dogs");
     // Allocate new memory and store the modified string there
@@ -40,6 +47,7 @@ fn test65() {
 
     assert_eq!(s1, "I like cats")
 }
+#[test]
 fn test66() {
     let s1 = String::from("hello,");
     let s2 = String::from("world!");
@@ -47,6 +55,7 @@ fn test66() {
     assert_eq!(s3,"hello,world!");
     println!("{}",s1);
 }
+#[test]
 fn test67() {
     let s = "hello, world".to_string();
     greetings3(s)
@@ -55,6 +64,7 @@ fn test67() {
 fn greetings3(s: String) {
     println!("{}",s)
 }
+#[test]
 fn test68() {
     let s = String::from("hello, world");
     greetings4(s)
@@ -63,18 +73,22 @@ fn test68() {
 fn greetings4(s: String) {
     println!("{}",s)
 }
+#[test]
 fn test69() {
     let s = "hello, world".to_string();
     let s1: &str = &s;
 }
+#[test]
 fn test70() {
     let s = "hello, world";
     let s1: &str = s;
 }
+#[test]
 fn test71() {
     let s = "hello, world".to_string();
     let s1: String = s;
 }
+#[test]
 fn test72() {
     // You can use escapes to write bytes by their hexadecimal values
     // fill the blank below to show "I'm writing Rust"
@@ -94,6 +108,7 @@ fn test72() {
                          can be escaped too!";
     println!("{}", long_string);
 }
+#[test]
 fn test73() {
     let raw_str = "Escapes don't work here: \x3F \u{211D}";
     // modify above line to make it work
@@ -112,6 +127,7 @@ fn test73() {
     let long_delimiter = r###"Hello, "##""###;
     assert_eq!(long_delimiter, "Hello, \"##\"")
 }
+#[test]
 fn test74() {
     let s1 = String::from("hi,中国");
     let h = &s1[0..1];
@@ -120,6 +136,7 @@ fn test74() {
     let h1 = &s1[3..6];
     assert_eq!(h1, "中");
 }
+#[test]
 fn test75() {
     for c in "你好，世界".chars() {
         println!("{}", c)

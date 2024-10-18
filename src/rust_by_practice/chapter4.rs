@@ -48,7 +48,7 @@ fn test14() {
 fn test15() {
     fn main() {
         let v1 = 251_u8.checked_add(8).unwrap();
-        let v2 = i8::checked_add(251, 8).unwrap();
+        let v2 = i32::checked_add(251, 8).unwrap();
 
         println!("{}, {}", v1, v2);
     }
@@ -86,12 +86,8 @@ fn test17() {
 #[test]
 fn test18() {
     fn main() {
-        let epsilon = 1e-10;
-        assert!((0.1 + 0.2 - 0.3).abs() < epsilon);
-
-        println!("Success!");
+        assert!(0.1_f32+0.2_f32==0.3_f32);
     }
-
 }
 ///Range
 #[test]
@@ -304,24 +300,24 @@ fn test42() {
 
 #[test]
 fn test43() {
-    fn main() {
-        never_return();
+    fn main1() {
+        never_return1();
 
         println!("Failed!");
     }
 
-    fn never_return() -> ! {
+    fn never_return1() -> ! {
         loop {} // Infinite loop
     }
 
     /// или
-    fn main() {
-        never_return();
+    fn main2() {
+        never_return2();
 
         println!("Failed!");
     }
 
-    fn never_return() -> ! {
+    fn never_return2() -> ! {
         panic!("This function will never return!");
     }
 
