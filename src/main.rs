@@ -1,6 +1,6 @@
 mod rust_by_practice;
 
-mod practice;
+mod hackerrank;
 
 fn main() {
     println!("Hello, world!");

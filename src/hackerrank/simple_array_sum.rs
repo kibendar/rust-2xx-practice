@@ -9,5 +9,5 @@ fn main() {
         sum += array[i];
     }
 
-    print!("{}", sum);
+    print!("Sum of elements of array: {}", sum);
 }
