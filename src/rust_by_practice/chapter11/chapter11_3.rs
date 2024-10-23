@@ -131,7 +131,7 @@ fn test145() {
 }
 
 #[test]
-fn main() {
+fn test146() {
     let v1 = 10;
     let mut m1 = HashMap::new();
     m1.insert(v1, v1);
