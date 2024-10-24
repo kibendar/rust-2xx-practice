@@ -1,78 +1,104 @@
-/// https://practice.course.rs/lifetime/static.html
+/// https://practice.course.rs/formatted-output/debug-display.html
+
+use std::fmt;
+
+#[derive(Debug)]
+struct Structure(i32);
 
 #[test]
-fn test194() {
-    let v: &str = "hello";
-    need_static(v);
+fn test171() {
+    // Types in std and Rust have implemented the fmt::Debug trait
+    println!("{:?} months in a year.", 12);
+
+    println!("Now {:?} will print!", Structure(3));
+}
+
+#[derive(Debug)]
+struct Person {
+    name: String,
+    age: u8
+}
+
+#[test]
+fn test172() {
+    let person = Person { name:  "Sunface".to_string(), age: 18 };
+
+    println!("{:#?}", person);
+}
+
+
+struct Structure2(i32);
+
+struct Deep(Structure2);
+impl fmt::Debug for Deep {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:?}", self.0.0)
+    }
+}
+
+#[test]
+fn test173() {
+    // The problem with `derive` is there is no control over how
+    // the results look. What if I want this to just show a `7`?
+
+    /* Make it print: Now 7 will print! */
+    println!("Now {:?} will print!", Deep(Structure2(7)));
+}
+
+struct Point2D {
+    x: f64,
+    y: f64,
+}
+
+impl fmt::Display for Point2D {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Display: {} + {}i", self.x, self.y)
+    }
+}
+
+impl fmt::Debug for Point2D {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Debug: Complex {{ real: {:?}, imag: {:?} }}", self.x, self.y)
+    }
+}
+#[test]
+fn test174() {
+    let point = Point2D { x: 3.3, y: 7.2 };
+
+    assert_eq!(format!("{}",point), "Display: 3.3 + 7.2i");
+    assert_eq!(format!("{:?}",point), "Debug: Complex { real: 3.3, imag: 7.2 }");
 
     println!("Success!")
 }
 
-fn need_static(r : &'static str) {
-    assert_eq!(r, "hello");
-}
+// Define a structure named `List` containing a `Vec`.
+struct List(Vec<i32>);
 
-// #[derive(Debug)]
-// struct Config {
-//     a: String,
-//     b: String,
-// }
-//
-//
-// fn init() -> Option<&'static mut Config> {
-//     let c = Box::new(Config {
-//         a: "A".to_string(),
-//         b: "B".to_string(),
-//     });
-//
-//     Some(Box::leak(c))
-// }
-//
-//
-// fn test195() {
-//     unsafe {
-//         config = init();
-//
-//         println!("{:?}",config)
-//     }
-// }
+impl fmt::Display for List {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        // Extract the value using tuple indexing,
+        // and create a reference to `vec`.
+        let vec = &self.0;
 
-#[test]
-fn test196() {
-    // Make a `string` literal and print it:
-    let static_string = "I'm in read-only memory";
-    println!("static_string: {}", static_string);
+        write!(f, "[")?;
 
-    println!("static_string reference remains alive: {}", static_string);
-}
+        // Iterate over `v` in `vec` while enumerating the iteration
+        // count in `count`.
+        for (count, v) in vec.iter().enumerate() {
+            // For every element except the first, add a comma.
+            // Use the ? operator to return on errors.
+            if count != 0 { write!(f, ", ")?; }
+            write!(f, "{}: {}",count, v)?;
+        }
 
-use std::fmt::Debug;
-
-fn print_it<T: Debug + 'static>( input: T) {
-    println!( "'static value passed in is: {:?}", input );
-}
-
-fn print_it1( input: impl Debug + 'static ) {
-    println!( "'static value passed in is: {:?}", input );
-}
-
-
-fn print_it2<T: Debug + 'static>( input: &T) {
-    println!( "'static value passed in is: {:?}", input );
+        // Close the opened bracket and return a fmt::Result value.
+        write!(f, "]")
+    }
 }
 
 #[test]
-fn test197() {
-    // i is owned and contains no references, thus it's 'static:
-    const i:i32 = 5;
-    print_it(i);
-
-    // oops, &i only has the lifetime defined by the scope of
-    // main(), so it's not 'static:
-    print_it(&i);
-
-    print_it1(&i);
-
-    // but this one WORKS !
-    print_it2(&i);
+fn test175() {
+    let v = List(vec![1, 2, 3]);
+    assert_eq!(format!("{}",v), "[0: 1, 1: 2, 2: 3]");
 }
+
