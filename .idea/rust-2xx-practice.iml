@@ -3,7 +3,12 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/rust_by_practice/chapter14/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/rust_by_practice/chapter14/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/rust_by_practice/chapter14/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/rust_by_practice/chapter14/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/src/rust_by_practice/chapter14/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
