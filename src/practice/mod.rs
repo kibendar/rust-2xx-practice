@@ -6,3 +6,4 @@ mod lower_upper_cases;
 mod prime_number;
 mod rotate;
 mod is_palindrome;
+mod min_adjacent_sum;
