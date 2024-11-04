@@ -10,3 +10,4 @@ mod min_adjacent_sum;
 mod shipments;
 mod rectangles;
 mod gray_code;
+mod muxaslon;
