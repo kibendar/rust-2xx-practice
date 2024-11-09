@@ -15,3 +15,4 @@ mod breaking_the_records;
 mod subarray_division;
 mod divisible_sum_pairs;
 mod migratory_birds;
+mod bon_appetit;
