@@ -16,3 +16,4 @@ mod subarray_division;
 mod divisible_sum_pairs;
 mod migratory_birds;
 mod bon_appetit;
+mod sock_merchant;
